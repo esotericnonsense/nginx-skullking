@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>skull king calc</title>
+  <link rel="stylesheet" href="main.css">
+  <meta name="description" content="skull king calc">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="round_view" class="round">
+      <table>
+        <thead>
+          <tr>
+            <th>round {{rn+1}}</th>
+            <th title="bet">🤞</th>
+            <th title="actual">act</th>
+            <th title="pirates">🏴‍☠️</th>
+            <th title="skulls">💀👑</th>
+            <th title="score">💯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="player in players">
+            <td class="name">{{ player.name }}</td>
+            <!-- lazy but works whatever -->
+            <template v-for="key in ['bet', 'act', 'pirates', 'skulls']">
+              <td class="inputnum" v-on:click="player.rounds[rn][key] = (player.rounds[rn][key]+1) % (rn+2)">{{ player.rounds[rn][key] }}</td>
+            </template>
+            <td class="round_score score">{{ calculateScore(rn, player.rounds[rn]) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button :disabled="rn<=0" v-on:click="prevRound">
+        round &lt;- {{rn}}
+      </button>
+      <button :disabled="rn>=9" v-on:click="nextRound">
+        -&gt; round {{rn+2}}
+      </button>
+    </div>
+
+    <button :class="{enabled: round_view}" v-on:click="toggleRoundView">
+      <span>round view</span>
+    </button>
+    <button :class="{enabled: scoreboard_view}" v-on:click="toggleScoreboardView">
+      <span>scoreboard view</span>
+    </button>
+
+    <div v-if="scoreboard_view" class="scoreboard">
+      <table>
+        <thead>
+          <tr>
+            <th>name/round</th>
+            <th class="final_score">tot</th>
+            <th v-for="(_, rn) in 10">r{{rn+1}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="player in players">
+            <td><input class="name" v-model="player.name"></td>
+            <td class="final_score score">
+              {{ totalScore(player) }}
+            </td>
+            <td class="score" v-for="(_, rn) in 10">
+              {{ calculateScore(rn, player.rounds[rn]) }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<script src="main.js"></script>

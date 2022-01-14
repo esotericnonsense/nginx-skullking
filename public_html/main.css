@@ -1,0 +1,21 @@
+* {
+    font-family: monospace;
+    font-size: 3vw;
+    user-select: none;
+}
+.final_score { font-weight: bold; border-right: 1px solid black;}
+.score { width: 4ch; text-align: right; }
+.name { width: 17ch; }
+input.name { width: 13ch; }
+.enabled { background-color: #aaffaa; font-weight: bold; }
+span.round_header { font-weight: bold; font-size: 5vw; }
+body, div { padding: 0; margin: 0; }
+button { width: 20ch; border: 1px solid black; border-radius: 5px; margin: 0 1vw; font-size: 3.7vw; }
+.round { background-color: #ffdddd; border-radius: 5px; }
+.scoreboard { background-color: #ffffdd; border-radius: 5px; }
+th { font-size: 3vw; }
+td.inputnum { font-size: 4.2vw; width: 5ch; text-align: center; }
+.round_score { font-size: 4.2vw; width: 5ch; text-align: center; font-weight: bold; }
+td.inputnum:hover { background-color: rgba(200,200,200,0.3); }
+td.inputnum:active { background-color: rgba(100,100,100,0.3); }
+td.active { background-color: #ffcccc; }
