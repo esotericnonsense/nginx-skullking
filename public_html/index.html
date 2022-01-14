@@ -13,6 +13,12 @@
 <body>
   <div id="app">
     <div v-if="round_view" class="round">
+      <button :disabled="rn<=0" class="prev_round" v-on:click="prevRound">
+        round {{rn}} [&lt;-]
+      </button>
+      <button :disabled="rn>=9" class="next_round" v-on:click="nextRound">
+        [-&gt;] round {{rn+2}}
+      </button>
       <table>
         <thead>
           <tr>
@@ -35,20 +41,16 @@
           </tr>
         </tbody>
       </table>
-      <button :disabled="rn<=0" v-on:click="prevRound">
-        round &lt;- {{rn}}
-      </button>
-      <button :disabled="rn>=9" v-on:click="nextRound">
-        -&gt; round {{rn+2}}
-      </button>
     </div>
 
+    <!--
     <button :class="{enabled: round_view}" v-on:click="toggleRoundView">
       <span>round view</span>
     </button>
     <button :class="{enabled: scoreboard_view}" v-on:click="toggleScoreboardView">
       <span>scoreboard view</span>
     </button>
+    -->
 
     <div v-if="scoreboard_view" class="scoreboard">
       <table>
@@ -73,11 +75,19 @@
       </table>
     </div>
     <button class="add_player" v-on:click="addPlayer">
-      <span>add player</span>
+      <span>add player [+] </span>
     </button>
+    <button class="del_player" v-on:click="confirmDeletePlayer">
+      <span>del player [-]</span>
+    </button>
+    <br />
     <button class="wipe_players" v-on:click="confirmWipePlayers">
-      <span>wipe players</span>
+      <span>wipe players [!]</span>
     </button>
+
+    <div id="footer">
+      hi hi <a href="https://esotericnonsense.com">esotericnonsense.com</a> <a href="mailto:skullking@esotericnonsense.com">skullking@esotericnonsense.com</a>
+    </div>
   </div>
 
 <script src="main.js"></script>

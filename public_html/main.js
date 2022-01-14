@@ -1,6 +1,7 @@
 // 2 player max, 10 round max
 const PLAYERS = 2;
 const ROUNDS = 10;
+const NAMES = ["athena", "coco", "chester", "macy", "ollie", "callie", "maverick", "romeo", "chloe", "mickey", "ace", "nina", "gizmo", "cody", "abbie", "rusty", "emma", "millie", "harry", "murphy", "diesel", "polo", "foster", "koda", "yoda", "kobe", "thor", "lady", "finn", "mocha", "fiona", "ella"];
 
 const App = {
   data() {
@@ -61,9 +62,8 @@ const App = {
       // console.log(`saved ${k} ${s} to localStorage`);
     },
     addPlayer() {
-      let alphabet = ["a","b","c","d","e","f","g", "h", "i", "j", "k"]; // lazy defaults
       player = {
-        name: `${alphabet[this.players.length]}`,
+        name: NAMES[~~(NAMES.length * Math.random())],
         rounds: [],
       };
       for (let r = 0; r < ROUNDS; ++r) {
@@ -75,6 +75,18 @@ const App = {
         });
       }
       this.players.push(player);
+    },
+    deletePlayer() {
+      if (this.players.length < 3) {
+        alert("two player minimum bruv");
+        return;
+      }
+      this.players.pop();
+    },
+    confirmDeletePlayer() {
+      if (confirm("Really delete the last player?")) {
+        this.deletePlayer();
+      }
     },
     wipePlayers() {
       // generate from scratch

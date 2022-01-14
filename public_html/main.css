@@ -1,21 +1,30 @@
 * {
-    font-family: monospace;
-    font-size: 3vw;
-    user-select: none;
+  font-family: monospace;
+  font-size: 3vw;
+  user-select: none;
 }
+#app { margin: 1vw; background-color: #eeeeee; }
 .final_score { font-weight: bold; border-right: 1px solid black;}
-.score { width: 4ch; text-align: right; }
-.name { width: 17ch; }
-input.name { width: 13ch; }
-.enabled { background-color: #aaffaa; font-weight: bold; }
-span.round_header { font-weight: bold; font-size: 5vw; }
-body, div { padding: 0; margin: 0; }
-button { width: 20ch; border: 1px solid black; border-radius: 5px; margin: 0 1vw; font-size: 3.7vw; }
+.name { width: 15ch; text-align: center; }
 .round { background-color: #ffdddd; border-radius: 5px; }
-.scoreboard { background-color: #ffffdd; border-radius: 5px; }
-th { font-size: 3vw; }
-td.inputnum { font-size: 4.2vw; width: 5ch; text-align: center; }
+.round, .scoreboard { border: 2px solid #dddddd; }
 .round_score { font-size: 4.2vw; width: 5ch; text-align: center; font-weight: bold; }
-td.inputnum:hover { background-color: rgba(200,200,200,0.3); }
-td.inputnum:active { background-color: rgba(100,100,100,0.3); }
+.score { width: 4ch; text-align: right; }
+.scoreboard { background-color: #ffffdd; border-radius: 5px; }
+body, div { padding: 0; margin: 0; }
+button { width: 20ch; border: 1px solid black; border-radius: 5px; margin: 1vw; font-size: 3.7vw; }
+button.add_player { background-color: #aaffaa; }
+button.del_player { color: black; background-color: #ffa555; }
+button.next_round, button.del_player { float: right; }
+button.wipe_players { font-weight: bold; color: white; background-color: #ff7777; display: block; margin: 1vw auto; }
+button:active { filter: brightness(50%); }
+button:hover { filter: brightness(80%); }
+input.name { width: 13ch; }
+span.round_header { font-weight: bold; font-size: 5vw; }
 td.active { background-color: #ffcccc; }
+td.inputnum { font-size: 4.2vw; width: 5ch; text-align: center; }
+td.inputnum:active { background-color: rgba(100,100,100,0.3); }
+td.inputnum:hover { background-color: rgba(200,200,200,0.3); }
+td.name { color: #311432; font-weight: bold; font-style: italic; font-size: 3.5vw; }
+th { font-size: 3vw; }
+div#footer, div#footer a { font-size: 1.5vw; text-align: center; border-top: 1px dashed black; }
