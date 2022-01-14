@@ -1,4 +1,4 @@
-# `nginx-skullking` 0.0.1
+# `nginx-skullking` 0.0.2
 
 docker container for a skull king calculator.
 
