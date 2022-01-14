@@ -1,5 +1,5 @@
-// 6 player max, 10 round max
-const PLAYERS = 6;
+// 2 player max, 10 round max
+const PLAYERS = 2;
 const ROUNDS = 10;
 
 const App = {
@@ -54,12 +54,16 @@ const App = {
     increment(rn, n) {
       return Math.max(rn, n+1);
     },
-  },
-  mounted() {
-    let alphabet = ["a","b","c","d","e","f"]; // lazy defaults
-    for (let p = 0; p < PLAYERS; p++) {
+    saveState(k, v) {
+      s = JSON.stringify(v);
+      // console.log(`saving ${k} ${s} to localStorage`);
+      localStorage.setItem(k, s);
+      // console.log(`saved ${k} ${s} to localStorage`);
+    },
+    addPlayer() {
+      let alphabet = ["a","b","c","d","e","f","g", "h", "i", "j", "k"]; // lazy defaults
       player = {
-        name: `${alphabet[p]}`,
+        name: `${alphabet[this.players.length]}`,
         rounds: [],
       };
       for (let r = 0; r < ROUNDS; ++r) {
@@ -71,12 +75,44 @@ const App = {
         });
       }
       this.players.push(player);
+    },
+    wipePlayers() {
+      // generate from scratch
+      this.players = [];
+      for (let p = 0; p < PLAYERS; p++) {
+        this.addPlayer();
+      }
+    },
+    confirmWipePlayers() {
+      if (confirm("Really wipe the game state?")) {
+        this.wipePlayers();
+      }
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("players")) {
+      // console.log(`restoring players from localStorage`);
+      s = localStorage.getItem("players");
+      // console.log(`restoring players ${s} to localStorage`);
+      this.players = JSON.parse(s);
+      if (this.players.len <= 2) {
+        // consider it to be corrupt
+        console.log("weird local storage {s}, wiping");
+        this.wipePlayers();
+      }
+      return;
     }
 
-    setInterval(() => {
-      this.counter++
-    }, 1000)
-  }
+    this.wipePlayers();
+  },
+  watch: {
+    players: {
+      handler(v, _) {
+        this.saveState("players", v)
+      },
+      deep: true,
+    },
+  },
 };
 
 Vue.createApp(App).mount("#app");
